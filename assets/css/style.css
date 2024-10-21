@@ -1,0 +1,271 @@
+* {
+    margin: 0;
+    padding: 0;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    font-family: 'Urbanist', 'sans-serif';
+}
+
+:root {
+    --background-color: #1b1b1b;
+    --text-color: #d4d4d4;
+    --text-color2: #b5b5b5;
+    --navhover: #a86666;
+    --contourCouleurlogo: #8e8e8e;
+    --eventContainerColor: #0b254c15;
+}
+
+html {
+    min-height: 100%;
+}
+
+
+body {
+    background-image: linear-gradient(to right bottom, #1a1a1a, #222222, #2b2b2b, #343434, #3d3d3d);
+    min-height: 100vh;
+}
+
+h2 {
+    font-family: 'Handjet', 'sans-serif';
+    font-weight: 500;
+    font-size: 80px;
+    text-transform: uppercase;
+}
+
+
+
+/* PAGE evenements.php */
+
+
+.eventContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.event {
+    width: 70%;
+    padding-top: 50px;
+    background: var(--eventContainerColor);
+    border-radius: 16px;
+    -webkit-box-shadow: 0px 0px 17px 8px rgba(0,0,0,0.52); 
+    box-shadow: 0px 0px 15px 10px rgba(0,0,0,0.52); 
+    backdrop-filter: blur(3.1px);
+    -webkit-backdrop-filter: blur(3.1px);
+}
+
+img {
+    width: 80%;
+    height: auto;
+}
+
+.btn, input {
+    width: 230px;
+    height: 58px;
+    background-color: var(--background-color);
+    color: var(--text-color2);
+    border: 2px solid var(--text-color2);
+    border-radius: 5px;
+    font-size: 28px;
+    font-weight: 700;
+
+    &&:hover {
+        cursor: pointer;
+        background-color: var(--text-color);
+        border: 2px solid var(--text-color);
+        color: var(--background-color);
+    }
+}
+
+.buttons input {
+    margin-right: 60px;
+}
+
+a, .infosEvent, .places, h2 {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+a:hover {
+    color: var(--background-color);
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 50px 0 120px 0;
+    font-size: 25px;
+}
+
+
+.event, .eventDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px 0 50px 0;
+    gap: 10px;
+}
+
+
+/* PAGE details.php */
+
+.eventContainer {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    width: 70%;
+    align-items: center; 
+    justify-content: center;
+    margin: 0 auto; 
+}
+
+.eventDetails img {
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+.eventDetails h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.infosEvent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
+    width: 80%;
+    margin-top: 10px;
+}
+
+.infosEvent-left {
+    flex-direction: column;
+    width: 50%;
+    margin: 20px 0 20px 40px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.date, .address, .price, .places {
+    margin-bottom: 10px;
+    font-family: 'Handjet', 'sans-serif';
+    font-weight: 400;
+    font-size: 30px;
+}
+
+
+.infosEvent-right {
+    flex-direction: column;
+    font-size: 20px;
+    width: 50%;
+    margin: 20px 10px 20px 0;
+}
+
+
+
+/* nav.php */
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px 20px 40px;
+    color: var(--text-color);
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 26px;
+    font-size: 20px;
+}
+
+nav a:hover, nav img:hover{
+    color: var(--navhover);
+}
+
+.logoHeader {
+    background-color: var(--contourCouleurlogo);
+    border-radius: 30px;
+    padding: 3px;
+    width: 50px;
+    height: 50px;
+}
+
+
+/* connexion.php */
+
+
+.formulaireContainer h2 {
+    margin-bottom: 60px;
+    font-size: 100px;
+}
+
+.connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.connexion input, .changerInfos input {
+    font-family: 'Handjet', 'sans-serif';
+    font-weight: 400;
+    font-size: 30px;
+    text-indent: 10px;
+    width: 400px;
+    height: 50px;
+}
+
+/* profil.php */
+
+.formulaireContainer {
+    width: 70%;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.changerInfos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.modifier {
+    margin-top: 50px;
+}
+
+
+/* messages flash */
+
+.alert {
+    font-family: 'Handjet', 'sans-serif';
+    margin-top: 50px;
+    font-size: 27px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.alert.danger {
+    color: red;
+}
+
+.alert.success {
+    color: green;
+}
