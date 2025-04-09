@@ -11,7 +11,7 @@ Une application web de gestion d'événements développée avec PHP et MySQL.
 
 1. Clonez le dépôt :
 ```bash
-git clone https://github.com/votre-username/Evenements.git
+git clone https://github.com/MaxNumerique/Evenements.git
 cd Evenements
 ```
 
