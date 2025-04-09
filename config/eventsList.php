@@ -1,6 +1,10 @@
 <?php
 
-$bdd = new PDO("mysql:host=localhost;dbname=evenements;charset=utf8;port=3306", "maxNumerique", "Lejizzus1");
+$bdd = new PDO(
+    "mysql:host=db;port=3307;dbname=evenements;charset=utf8",
+    'root',
+    'root'
+);
 
 $sql = "SELECT * FROM events";
 $req = $bdd->query($sql);

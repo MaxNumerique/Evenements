@@ -1,9 +1,12 @@
 <?php
-    $localhost = "localhost";
-    $database = "evenements";
-    $user = "maxNumerique";
-    $password = "Lejizzus1";
-
-    $cnx = new PDO("mysql:host=$localhost;dbname=$database;charset=utf8;port=3306", $user, $password);
-
+    try {
+        $cnx = new PDO(
+            "mysql:host=db;port=3307;dbname=evenements;charset=utf8",
+            'root',
+            'root'
+        );
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+        die('Erreur de connexion à la base de données : ' . $e->getMessage());
+    }
 ?>

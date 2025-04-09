@@ -1,0 +1,42 @@
+services:
+    web:
+        build: .
+        ports:
+            - ${WEB_PORT}:80
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - db
+        environment:
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=3307
+            - DB_NAME=${DB_NAME}
+            - DB_USER=root
+            - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        
+    db:
+        image: mysql:5.7
+        command: --port=3307
+        environment:
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${DB_NAME}
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+        ports:
+            - ${DB_PORT}:3307
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        environment:
+            - PMA_HOST=db
+            - PMA_PORT=3307
+            - PMA_USER=root
+            - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        ports:
+            - ${PMA_PORT}:80
+        depends_on:
+            - db
+
+volumes:
+    mysql_data:
