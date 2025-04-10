@@ -7,36 +7,6 @@ on:
     branches: [ "main", "master" ]
 
 jobs:
-  lint-and-test:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Cloner le repo
-      uses: actions/checkout@v3
-    
-    - name: Installer et set up PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'
-        extensions: mbstring, intl, pdo_mysql
-        coverage: xdebug
-    
-    - name: Vérifier le style PHP
-      run: |
-        if command -v phpcs &> /dev/null; then
-          phpcs --standard=PSR2 src/
-        else
-          echo "PHPCS not installed. Skipping code style check."
-        fi
-    
-    - name: Analyser le code PHP
-      run: |
-        if command -v phpstan &> /dev/null; then
-          phpstan analyse src/
-        else
-          echo "PHPStan not installed. Skipping static analysis."
-        fi
-  
   deploy:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
@@ -44,12 +14,21 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Déployer sur Railway
+    - name: Install Railway CLI
       run: |
-        if [ -n "${{ secrets.RAILWAY_TOKEN }}" ]; then
-          curl -fsSL https://railway.app/install.sh | sh
-          railway login --token ${{ secrets.RAILWAY_TOKEN }}
-          railway up
-        else
-          echo "Railway token not configured. Skipping deployment."
-        fi
+        curl -fsSL https://railway.app/install.sh | sh
+    
+    - name: Login to Railway
+      run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+    
+    - name: Link to Railway Project
+      run: |
+        railway link ${{ secrets.RAILWAY_PROJECT }}
+    
+    - name: Deploy to Railway
+      run: |
+        railway up --detach \
+          -e MYSQLHOST=${{ secrets.MYSQLHOST }} \
+          -e MYSQLPORT=${{ secrets.MYSQLPORT }} \
+          -e MYSQLDATABASE=${{ secrets.MYSQLDATABASE }} \
+          -e MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}

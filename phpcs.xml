@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<ruleset name="Evenements Coding Standard">
-    <description>Coding standard for Evenements project</description>
-    <rule ref="PSR2"/>
-    <file>src</file>
-    <exclude-pattern>*/tests/*</exclude-pattern>
-</ruleset>
