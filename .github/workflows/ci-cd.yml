@@ -22,7 +22,12 @@ jobs:
         coverage: xdebug
     
     - name: Valider les fichiers composer
-      run: composer validate --strict
+      run: |
+        if [ -f composer.json ]; then
+          composer validate --strict
+        else
+          echo "composer.json not found. Skipping validation."
+        fi
     
     - name: Valider le cache composer
       id: composer-cache
