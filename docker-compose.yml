@@ -10,7 +10,7 @@ services:
         environment:
             - MYSQLHOST=${MYSQLHOST}
             - MYSQLPORT=3307
-            - MYSQLNAME=${MYSQLNAME}  
+            - MYSQLDATABASE=${MYSQLDATABASE}
             - DB_USER=root
             - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
         
@@ -19,7 +19,7 @@ services:
         command: --port=3307
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-            - MYSQL_DATABASE=${DB_NAME}
+            - MYSQL_DATABASE=${MYSQLDATABASE}
         volumes:
             - mysql_data:/var/lib/mysql
             - ./init.sql:/docker-entrypoint-initdb.d/init.sql

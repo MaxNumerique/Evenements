@@ -18,7 +18,7 @@ COPY init.sql /docker-entrypoint-initdb.d/
 # Set environment variables
 ENV MYSQLHOST=db
 ENV MYSQLPORT=3307
-ENV MYSQLNAME=evenements
+ENV MYSQLDATABASE=evenements
 ENV MYSQL_ROOT_PASSWORD=root
 
 # Expose port
