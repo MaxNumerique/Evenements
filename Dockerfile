@@ -11,3 +11,15 @@ COPY . /var/www/html
 
 # Set ServerName globally
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Initialize database
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Set environment variables
+ENV MYSQLHOST=db
+ENV MYSQLPORT=3307
+ENV MYSQLNAME=evenements
+ENV MYSQL_ROOT_PASSWORD=root
+
+# Expose port
+EXPOSE 8080
