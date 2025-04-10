@@ -4,6 +4,8 @@ mysql_data/
 # IDE files
 .idea/
 .vscode/
+*.swp
+*.swo
 
 # OS generated files
 .DS_Store
@@ -17,9 +19,12 @@ Thumbs.db
 # Logs
 *.log
 logs/
+/tmp/
 
 # Dependencies
 vendor/
 node_modules/
+/vendor/
+composer.lock
 
 # Environment variables

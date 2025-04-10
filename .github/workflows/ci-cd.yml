@@ -1,0 +1,61 @@
+name: CI/CD Workflow for Evenements
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Cloner le repo
+      uses: actions/checkout@v3
+    
+    - name: Installer et set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, intl, pdo_mysql
+        coverage: xdebug
+    
+    - name: Valider les fichiers composer
+      run: composer validate --strict
+    
+    - name: Valider le cache composer
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    
+    - name: Installer les dépendances
+      run: composer install --prefer-dist --no-progress
+    
+    - name: Vérifier le style PHP
+      run: vendor/bin/phpcs --standard=PSR2 src/
+    
+    - name: Analyser le code PHP
+      run: vendor/bin/phpstan analyse src/
+  
+  deploy:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Déployer sur Railway
+      run: |
+        if [ -n "${{ secrets.RAILWAY_TOKEN }}" ]; then
+          curl -fsSL https://railway.app/install.sh | sh
+          railway login --token ${{ secrets.RAILWAY_TOKEN }}
+          railway up
+        else
+          echo "Railway token not configured. Skipping deployment."
+        fi
