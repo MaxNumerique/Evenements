@@ -1,7 +1,7 @@
 <?php
     try {
         $cnx = new PDO(
-            "mysql:host=${MYSQLHOST};port=${MYSQLPORT};dbname=${MYSQLDATABASE};charset=utf8",
+            "mysql:host=" . getenv('MYSQLHOST') . ";port=" . getenv('MYSQLPORT') . ";dbname=" . getenv('MYSQLDATABASE') . ";charset=utf8",
             'root',
             'root'
         );
