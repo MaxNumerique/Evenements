@@ -1,6 +1,5 @@
 <?php
     // Récupérer l'URL de connexion depuis les variables d'environnement
-    // Railway utilise MYSQL_URL mais nous gardons aussi les variables individuelles
     $mysqlUrl = getenv('MYSQL_URL');
     
     if ($mysqlUrl) {
@@ -10,12 +9,13 @@
         $mysqlPort = $dbParts['port'] ?? 3306;
         $mysqlUser = $dbParts['user'] ?? 'root';
         $mysqlPassword = $dbParts['pass'] ?? '';
-        $mysqlDatabase = substr($dbParts['path'], 1) ?? 'evenements';
+        // Utilisez le nom de base de données fourni par Railway (railway)
+        $mysqlDatabase = substr($dbParts['path'], 1) ?? 'railway';
     } else {
         // Fallback sur les variables individuelles
         $mysqlHost = getenv('MYSQLHOST') ?: 'localhost';
         $mysqlPort = getenv('MYSQLPORT') ?: 3306;
-        $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'evenements';
+        $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'railway';  // Changé de 'evenements' à 'railway'
         $mysqlUser = getenv('MYSQL_USER') ?: 'root';
         $mysqlPassword = getenv('MYSQL_ROOT_PASSWORD') ?: 'root';
     }
