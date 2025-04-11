@@ -15,7 +15,7 @@
         // Fallback sur les variables individuelles
         $mysqlHost = getenv('MYSQLHOST') ?: 'localhost';
         $mysqlPort = getenv('MYSQLPORT') ?: 3306;
-        $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'railway';  // Changé de 'evenements' à 'railway'
+        $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'evenements';
         $mysqlUser = getenv('MYSQL_USER') ?: 'root';
         $mysqlPassword = getenv('MYSQL_ROOT_PASSWORD') ?: 'root';
     }
