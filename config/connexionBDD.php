@@ -1,10 +1,24 @@
 <?php
     // Récupérer l'URL de connexion depuis les variables d'environnement
-    $mysqlHost = getenv('MYSQLHOST') ?: 'localhost';
-    $mysqlPort = getenv('MYSQLPORT') ?: 3306;
-    $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'evenements';
-    $mysqlUser = getenv('MYSQL_USER') ?: 'root';
-    $mysqlPassword = getenv('MYSQL_ROOT_PASSWORD') ?: 'root';
+    // Railway utilise MYSQL_URL mais nous gardons aussi les variables individuelles
+    $mysqlUrl = getenv('MYSQL_URL');
+    
+    if ($mysqlUrl) {
+        // Parse l'URL de connexion Railway
+        $dbParts = parse_url($mysqlUrl);
+        $mysqlHost = $dbParts['host'] ?? 'localhost';
+        $mysqlPort = $dbParts['port'] ?? 3306;
+        $mysqlUser = $dbParts['user'] ?? 'root';
+        $mysqlPassword = $dbParts['pass'] ?? '';
+        $mysqlDatabase = substr($dbParts['path'], 1) ?? 'evenements';
+    } else {
+        // Fallback sur les variables individuelles
+        $mysqlHost = getenv('MYSQLHOST') ?: 'localhost';
+        $mysqlPort = getenv('MYSQLPORT') ?: 3306;
+        $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'evenements';
+        $mysqlUser = getenv('MYSQL_USER') ?: 'root';
+        $mysqlPassword = getenv('MYSQL_ROOT_PASSWORD') ?: 'root';
+    }
 
     try {
         $cnx = new PDO(

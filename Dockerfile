@@ -1,25 +1,21 @@
-FROM php:apache
+FROM php:8.1-apache
 
 # Install extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Copy Apache configuration
-COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+# Enable Apache rewrite module
+RUN a2enmod rewrite
 
 # Copy application
-COPY . /var/www/html
+COPY . /var/www/html/
 
-# Set ServerName globally
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/
+RUN chmod -R 755 /var/www/html/
 
-# Initialize database
-COPY init.sql /docker-entrypoint-initdb.d/
-
-# Set environment variables
-ENV MYSQLHOST=db
-ENV MYSQLPORT=3307
-ENV MYSQLDATABASE=evenements
-ENV MYSQL_ROOT_PASSWORD=root
+# Remove the environment variables from Dockerfile as they'll be set by Railway
+# and copy .env variables won't work for actual deployment
 
 # Expose port
-EXPOSE 8080
+EXPOSE 80
+CMD ["apache2-foreground"]

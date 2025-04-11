@@ -19,14 +19,6 @@ jobs:
     - name: Login to Railway
       run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
     
-    - name: Link to Railway Project
-      run: |
-        railway link ${{ secrets.RAILWAY_PROJECT }}
-    
     - name: Deploy to Railway
       run: |
-        railway up --detach \
-          -e MYSQLHOST=${{ secrets.MYSQLHOST }} \
-          -e MYSQLPORT=${{ secrets.MYSQLPORT }} \
-          -e MYSQLDATABASE=${{ secrets.MYSQLDATABASE }} \
-          -e MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+        railway up --detach
