@@ -1,12 +1,14 @@
 <?php
-
-$bdd = new PDO(
-    "mysql:host=db;port=3307;dbname=evenements;charset=utf8",
-    'root',
-    'root'
-);
-
-$sql = "SELECT * FROM events";
-$req = $bdd->query($sql);
-
-$events = $req->fetchAll(PDO::FETCH_ASSOC);
+    // Inclure le fichier de connexion
+    $bdd = require_once __DIR__ . '/connexionBDD.php';
+    
+    try {
+        $sql = "SELECT * FROM events";
+        $req = $bdd->query($sql);
+        
+        $events = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch(PDOException $e) {
+        error_log('Erreur lors de la récupération des événements : ' . $e->getMessage());
+        die('Erreur lors de la récupération des événements.');
+    }
+?>
