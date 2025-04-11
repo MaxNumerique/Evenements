@@ -1,5 +1,6 @@
 <?php
     // Récupérer l'URL de connexion depuis les variables d'environnement
+    // Railway utilise MYSQL_URL mais nous gardons aussi les variables individuelles
     $mysqlUrl = getenv('MYSQL_URL');
     
     if ($mysqlUrl) {
@@ -26,7 +27,6 @@
             $mysqlPassword
         );
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $cnx; // Retourne la connexion
     } catch(PDOException $e) {
         // Log détaillé de l'erreur
         error_log('Erreur de connexion à la base de données : ' . $e->getMessage());
