@@ -16,7 +16,7 @@
         $mysqlHost = getenv('MYSQLHOST') ?: 'localhost';
         $mysqlPort = getenv('MYSQLPORT') ?: 3306;
         $mysqlDatabase = getenv('MYSQLDATABASE') ?: 'evenements';
-        $mysqlUser = getenv('MYSQL_USER') ?: 'root';
+        $mysqlUser = getenv('MYSQLUSER') ?: 'root';
         $mysqlPassword = getenv('MYSQL_ROOT_PASSWORD') ?: 'root';
     }
 
