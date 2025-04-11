@@ -10,7 +10,7 @@
         $mysqlUser = $dbParts['user'] ?? 'root';
         $mysqlPassword = $dbParts['pass'] ?? '';
         // Utilisez le nom de base de données fourni par Railway (railway)
-        $mysqlDatabase = substr($dbParts['path'], 1) ?? 'railway';
+        $mysqlDatabase = substr($dbParts['path'], 1) ?? 'evenements';
     } else {
         // Fallback sur les variables individuelles
         $mysqlHost = getenv('MYSQLHOST') ?: 'localhost';
