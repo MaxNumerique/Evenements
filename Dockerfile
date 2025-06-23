@@ -13,9 +13,6 @@ COPY . /var/www/html/
 RUN chown -R www-data:www-data /var/www/html/
 RUN chmod -R 755 /var/www/html/
 
-# Remove the environment variables from Dockerfile as they'll be set by Railway
-# and copy .env variables won't work for actual deployment
-
 # Expose port
 EXPOSE 80
 CMD ["apache2-foreground"]
