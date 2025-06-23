@@ -14,17 +14,19 @@ require_once 'config/connexionBDD.php';
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
         .logo {
-            width: 50%;
-            animation: pulse 2s ease-in-out infinite alternate;
+            width: 200px;
+            height: 200px;
+            animation: rotate 2s linear;
         }
-        @keyframes pulse {
+        @keyframes rotate {
             from {
-                transform: scale(1);
+                transform: rotate(0deg);
             }
             to {
-                transform: scale(1.1);
+                transform: rotate(360deg);
             }
         }
     </style>
