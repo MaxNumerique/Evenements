@@ -11,12 +11,12 @@ services:
             - MYSQLHOST=${MYSQLHOST}
             - MYSQLPORT=3307
             - MYSQLDATABASE=${MYSQLDATABASE}
-            - DB_USER=root
-            - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            - MYSQLUSER=root
+            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
         
     db:
         image: mysql:5.7
-        command: --port=3307
+        command: --port=3307 --default-authentication-plugin=mysql_native_password
         environment:
             - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             - MYSQL_DATABASE=${MYSQLDATABASE}
